@@ -78,4 +78,6 @@ class DtmfGenerationStream extends ToneStream {
   }
 }
 
-module.exports = DtmfGenerationStream
+module.exports = {
+  DtmfGenerationStream
+}

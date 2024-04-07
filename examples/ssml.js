@@ -1,4 +1,4 @@
-const DtmfGenerationStream = require('../index.js')
+const { DtmfGenerationStream }  = require('../index.js')
 const Speaker = require('speaker')
 
 const format = {
