@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/MayamaTakeshi/dtmf-generation-stream#readme",
   "dependencies": {
-    "tone-stream": "^1.6.0",
+    "tone-stream": "^1.7.0",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
