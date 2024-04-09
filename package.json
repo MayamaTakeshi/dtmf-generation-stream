@@ -1,6 +1,6 @@
 {
   "name": "dtmf-generation-stream",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A node.js stream that generates DTMF tones",
   "main": "index.js",
   "engines": {
@@ -20,10 +20,17 @@
   },
   "homepage": "https://github.com/MayamaTakeshi/dtmf-generation-stream#readme",
   "dependencies": {
-    "tone-stream": "^1.7.0",
+    "tone-stream": "^1.8.0",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "speaker": "^0.5.4"
-  }
+  },
+  "files": [
+    "index.js",
+    "src",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ]
 }
