@@ -13,7 +13,7 @@ You can specify digits to be generated as a simple string like '1234' or use SSM
 ```
 npm i dtmf-generation-stream
 ```
-## Usage
+## Sample Usage
 ```
 const DtmfGenerationStream = require('dtmf-generation-stream')
 const Speaker = require('speaker')
@@ -44,6 +44,11 @@ dgs.on('empty', () => {
   dgs.enqueue(ssml)
 })
 ```
+
+## More Examples
+
+See [here](https://github.com/MayamaTakeshi/dtmf-generation-stream/tree/main/examples).
+
 ## Events
 
 The stream emits event 'empty' indicating when there are no more digits in the queue to be played.
