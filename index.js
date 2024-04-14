@@ -5,9 +5,9 @@ const xml = require("xml-js");
 const DEFAULT_DIGIT_DURATION = "50ms";
 
 class DtmfGenerationStream extends ToneStream {
-  constructor(format, opts) {
-    super(format, opts);
-    this.format = format;
+  constructor(args) {
+    super(args.format);
+    this.format = args.format;
   }
 
   enqueue(content) {
@@ -92,6 +92,4 @@ class DtmfGenerationStream extends ToneStream {
   }
 }
 
-module.exports = {
-  DtmfGenerationStream,
-};
+module.exports = DtmfGenerationStream
