@@ -24,7 +24,7 @@ const format = {
 	channels: 1
 }
 
-const dgs = new DtmfGenerationStream(format)
+const dgs = new DtmfGenerationStream({format})
 
 const s = new Speaker(format)
 
