@@ -1,6 +1,6 @@
 {
   "name": "dtmf-generation-stream",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "A node.js stream that generates DTMF tones",
   "main": "index.js",
   "engines": {

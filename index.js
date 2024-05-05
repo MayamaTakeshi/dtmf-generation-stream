@@ -10,18 +10,28 @@ class DtmfGenerationStream extends ToneStream {
     this.format = args.format;
   }
 
-  enqueue(content) {
-    var elements = content;
-    if (content.startsWith("<speak>")) {
-      content = xml.xml2js(content);
-      elements = content.elements[0].elements;
-    } else {
+  enqueue(params) {
+    var elements
+    if(typeof params == 'string') {
       elements = [
         {
           type: "text",
-          text: elements,
+          text: params
         },
       ];
+    } else {
+      if(params.headers && params.headers["content-type"] == "application/ssml+xml") {
+        console.log(JSON.stringify(params))
+        const parsed = xml.xml2js(params.body);
+        elements = parsed.elements[0].elements;
+      } else {
+        elements = [
+          {
+            type: "text",
+            text: params.body,
+          },
+        ];
+      }
     }
 
     //console.log(elements)
@@ -31,8 +41,8 @@ class DtmfGenerationStream extends ToneStream {
     this.add([800, "s"]); // final silence
   }
 
-  speak(content) {
-    this.enqueue(content)
+  speak(params) {
+    this.enqueue(params)
   }
 
   parse_duration(duration) {
