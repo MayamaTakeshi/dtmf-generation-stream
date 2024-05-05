@@ -13,15 +13,19 @@ class DtmfGenerationStream extends ToneStream {
   enqueue(params) {
     var elements
     if(typeof params == 'string') {
-      elements = [
-        {
-          type: "text",
-          text: params
-        },
-      ];
+      if(params.startsWith('<speak>')) {
+        const parsed = xml.xml2js(params);
+        elements = parsed.elements[0].elements;
+      } else {
+        elements = [
+          {
+            type: "text",
+            text: params
+          },
+        ];
+      }
     } else {
       if(params.headers && params.headers["content-type"] == "application/ssml+xml") {
-        console.log(JSON.stringify(params))
         const parsed = xml.xml2js(params.body);
         elements = parsed.elements[0].elements;
       } else {
