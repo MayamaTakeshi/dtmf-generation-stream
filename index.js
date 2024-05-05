@@ -31,6 +31,10 @@ class DtmfGenerationStream extends ToneStream {
     this.add([800, "s"]); // final silence
   }
 
+  speak(content) {
+    this.enqueue(content)
+  }
+
   parse_duration(duration) {
     if (duration.endsWith("ms")) {
       return parseInt(duration);
