@@ -5,12 +5,21 @@ const xml = require("xml-js");
 const DEFAULT_DIGIT_DURATION = "50ms";
 
 class DtmfGenerationStream extends ToneStream {
-  constructor(args) {
-    super(args.format);
-    this.format = args.format;
+  constructor(opts) {
+    super(opts.format);
+    this.format = opts.format;
+
+    this.params = opts.params
+    if(this.params) {
+      this.speak()
+    }
   }
 
   enqueue(params) {
+    if(!params) {
+      params = this.params
+    }
+
     var elements
     if(typeof params == 'string') {
       if(params.startsWith('<speak>')) {
@@ -25,14 +34,14 @@ class DtmfGenerationStream extends ToneStream {
         ];
       }
     } else {
-      if(params.headers && params.headers["content-type"] == "application/ssml+xml") {
-        const parsed = xml.xml2js(params.body);
-        elements = parsed.elements[0].elements;
+      if(params["content-type"] == "application/ssml+xml" || params.text.startsWith('<speak>')) {
+        const parsed = xml.xml2js(params.text)
+        elements = parsed.elements[0].elements
       } else {
         elements = [
           {
             type: "text",
-            text: params.body,
+            text: params.text,
           },
         ];
       }
