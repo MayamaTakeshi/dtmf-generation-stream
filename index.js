@@ -10,16 +10,23 @@ class DtmfGenerationStream extends ToneStream {
     this.format = opts.format;
 
     this.params = opts.params
-    if(this.params) {
-      this.speak()
+    if(!this.params.times) {
+      this.params.times = 1
     }
+    
+    this.on('empty', () => {
+      //console.log('empty')
+      this.params.times--
+      //console.log("times", this.params.times)
+      if(this.params.times > 0) {
+        this.enqueue(this.params)
+      }
+    })
+
+    this.enqueue(this.params)
   }
 
   enqueue(params) {
-    if(!params) {
-      params = this.params
-    }
-
     var elements
     if(typeof params == 'string') {
       if(params.startsWith('<speak>')) {
@@ -52,10 +59,6 @@ class DtmfGenerationStream extends ToneStream {
     this.add([800, "s"]); // initial silence
     this.process_elements(elements);
     this.add([800, "s"]); // final silence
-  }
-
-  speak(params) {
-    this.enqueue(params)
   }
 
   parse_duration(duration) {

@@ -7,19 +7,18 @@ const format = {
 	channels: 1
 }
 
-const dgs = new DtmfGenerationStream({format})
+const params = {
+  text: '0123456789abcd*#',
+  times: Infinity,
+}
+
+const opts = {
+  format,
+  params,
+}
+
+const dgs = new DtmfGenerationStream(opts)
 
 const s = new Speaker(format)
-
-var digits = '0123456789abcd*#'
-console.log(`Enqueueing ${digits}`)
-dgs.enqueue(digits)
-
-dgs.on('empty', () => {
-	console.log("Got event 'empty'. Reversing digits.")
-  digits = digits.split("").reverse().join("")
-  console.log(`Enqueueing ${digits}`)
-	dgs.enqueue(digits)
-})
 
 dgs.pipe(s)
